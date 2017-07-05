@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<registry>
+
+  <records prefix="plone.resources/jsalerts-pattern-jsalert"
+           interface='Products.CMFPlone.interfaces.IResourceRegistry'
+           remove="true">
+  </records>
+
+  <records prefix="plone.resources/jsalerts"
+           interface='Products.CMFPlone.interfaces.IResourceRegistry'
+           remove="true">
+  </records>
+
+  <records prefix="plone.resources/crypto-js"
+            interface='Products.CMFPlone.interfaces.IResourceRegistry'
+           remove="true">
+  </records>
+
+  <records prefix="plone.bundles/jsalerts"
+           interface='Products.CMFPlone.interfaces.IBundleRegistry'
+           remove="true">
+  </records>
+
+</registry>

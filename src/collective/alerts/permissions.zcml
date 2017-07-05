@@ -1,0 +1,12 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    >
+
+  <include package="Products.CMFCore" file="permissions.zcml" />
+
+  <permission
+    id="collective.alerts.canSetAlertMessage"
+    title="collective.alerts: Can set alert message"
+    />
+
+</configure>

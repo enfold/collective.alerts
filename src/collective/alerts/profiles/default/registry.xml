@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<registry>
+
+  <records prefix="plone.resources/jsalerts-pattern-jsalert"
+            interface='Products.CMFPlone.interfaces.IResourceRegistry'>
+      <value key="js">++plone++collective.alerts/js/patterns/jsalert/pattern.js</value>
+      <value key="css">
+        <element>++plone++collective.alerts/js/patterns/jsalert/less/pattern.jsalert.less</element>
+      </value>
+  </records>
+
+  <records prefix="plone.resources/jsalerts"
+            interface='Products.CMFPlone.interfaces.IResourceRegistry'>
+      <value key="js">++plone++collective.alerts/js/jsalerts.js</value>
+      <value key="css">
+        <element>++plone++collective.alerts/less/jsalert.less</element>
+      </value>
+  </records>
+
+  <records prefix="plone.resources/crypto-js"
+            interface='Products.CMFPlone.interfaces.IResourceRegistry'>
+      <value key="js">++plone++collective.alerts/js/libs/crypto-js-3.1.9-1/crypto-js.js</value>
+  </records>
+
+  <records prefix="plone.bundles/jsalerts"
+           interface='Products.CMFPlone.interfaces.IBundleRegistry'>
+    <value key="csscompilation">++plone++collective.alerts/css/jsalerts.min.css</value>
+    <value key="jscompilation">++plone++collective.alerts/js/jsalerts.min.js</value>
+    <value key="last_compilation">2017-06-29 00:00:00</value>
+    <value key="compile">True</value>
+    <value key="depends">plone</value>
+    <value key="resources">
+      <element>jsalerts</element>
+    </value>
+    <value key="enabled">True</value>
+    <value key="merge_with">default</value>
+    <value key="stub_js_modules">
+      <element>jquery</element>
+      <element>mockup-patterns-base</element>
+    </value>
+  </records>
+
+</registry>

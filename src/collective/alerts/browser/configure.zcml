@@ -1,0 +1,30 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    i18n_domain="collective.alerts">
+
+    <browser:page
+        for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+        name="set-alert-message"
+        class=".alert_view.setAlertMessage"
+        permission="collective.alerts.canSetAlertMessage"
+        layer="collective.alerts.interfaces.ICollectiveAlertsLayer"
+        />
+
+    <browser:page
+        for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+        name="get-alert-message"
+        class=".alert_view.getAlertMessage"
+        permission="zope2.View"
+        layer="collective.alerts.interfaces.ICollectiveAlertsLayer"
+        />
+
+    <browser:viewlet
+        name="collective.alerts.alert"
+        manager="plone.app.layout.viewlets.interfaces.IPortalTop"
+        template="alert_viewlet.pt"
+        class=".alert_viewlet.AlertViewlet"
+        permission="zope2.View"
+        />
+
+</configure>

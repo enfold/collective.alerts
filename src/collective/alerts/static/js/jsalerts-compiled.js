@@ -9380,6 +9380,10 @@ define('jsalerts-pattern-jsalert',[
       trigger_tab.addClass('alert-'+data.klass);
       trigger_tab.html(data.title ? data.title : data.klass);
       self.$el.append(trigger_tab);
+
+      /* It should be opened by default */
+      trigger_tab.trigger('click');
+
     },
 
     init: function() {

@@ -21,7 +21,7 @@
 
     <browser:viewlet
         name="collective.alerts.alert"
-        manager="plone.app.layout.viewlets.interfaces.IPortalTop"
+        manager="plone.app.layout.viewlets.interfaces.IAboveContent"
         template="alert_viewlet.pt"
         class=".alert_viewlet.AlertViewlet"
         permission="zope2.View"

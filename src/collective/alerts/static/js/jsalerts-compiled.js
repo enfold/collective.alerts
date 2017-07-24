@@ -9346,9 +9346,6 @@ define('jsalerts-pattern-jsalert',[
                   });
 
       var msg = $('<div></div>');
-      if (data.title !== ""){
-        msg.append($('<strong>'+data.title+': </strong>'));
-      }
       if (data.message !== ""){
         msg.append($('<span>'+data.message+'</span>'));
       }
@@ -9461,5 +9458,5 @@ require([
 });
 
 
-define("/vagrant/src/collective/alerts/static/js/jsalerts.js", function(){});
+define("/vagrant/src/collective.alerts/src/collective/alerts/static/js/jsalerts.js", function(){});
 

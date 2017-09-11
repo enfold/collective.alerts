@@ -139,9 +139,9 @@ class setAlertMessage(AutoExtensibleForm, EditForm):
             self.widgets['retract_timeout'].value = alert_msg.get('retract_timeout', 0)
 
             if 'display_on_every_page' in alert_msg and not alert_msg.get('display_on_every_page'):
-                self.widgets['display_on_every_page'].items[0]['checked'] = False
+                self.widgets['display_on_every_page'].value = []
             else:
-                self.widgets['display_on_every_page'].items[0]['checked'] = True
+                self.widgets['display_on_every_page'].value = ['selected']
 
     def update(self):
         self.request.set('disable_border', 1)

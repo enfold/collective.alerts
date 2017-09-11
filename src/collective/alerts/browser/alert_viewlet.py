@@ -1,6 +1,4 @@
-from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from plone.app.layout.viewlets.common import ViewletBase
-from Products.statusmessages.interfaces import IStatusMessage
 
 
 class AlertViewlet(ViewletBase):

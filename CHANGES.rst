@@ -5,7 +5,8 @@ Changelog
 1.1 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- Release again with new version to avoid conflicts
+  [frapell]
 
 
 1.0 (2017-10-06)

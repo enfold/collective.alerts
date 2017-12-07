@@ -9339,6 +9339,14 @@ define('jsalerts-pattern-jsalert',[
       slide_box.addClass(direction);
       slide_box.addClass('alert-'+data.klass);
 
+      var minimize = $('<button type="button" class="close minimize"><span aria-hidden="true">&nbsp;-</span></button>')
+                  .on('click', function () {
+                      if (slide_box.hasClass('visible')){
+                        slide_box.removeClass('visible');
+                        clearTimeout(timeout);
+                      }
+                  });
+
       var close = $('<button type="button" class="close"><span aria-hidden="true">&times;</span></button>')
                   .on('click', function () {
                       self.$el.html("");
@@ -9350,6 +9358,7 @@ define('jsalerts-pattern-jsalert',[
         msg.append($('<span>'+data.message+'</span>'));
       }
       slide_box.append(close);
+      slide_box.append(minimize);
       slide_box.append(msg);
 
       self.$el.html("");
@@ -9458,5 +9467,5 @@ require([
 });
 
 
-define("/vagrant/src/collective.alerts/src/collective/alerts/static/js/jsalerts.js", function(){});
+define("/vagrant/src/collective/alerts/static/js/jsalerts.js", function(){});
 

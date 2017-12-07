@@ -2,8 +2,8 @@ Changelog
 =========
 
 
-2.1 (unreleased)
-----------------
+2.0.1 (2017-12-07)
+------------------
 
 - Include minimize icon
   [frapell]

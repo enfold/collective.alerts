@@ -89,7 +89,7 @@ class IAlertSchema(model.Schema):
             u"it will show up on every page refresh."
         ),
         required=False,
-        default=0.0,
+        default=24.0,
     )
 
     retract_timeout = Int(
@@ -135,7 +135,7 @@ class setAlertMessage(AutoExtensibleForm, EditForm):
             self.widgets['title'].value = alert_msg.get('title', u"")
             self.widgets['alert_type'].value = (alert_msg.get('klass', 'disabled'),)
             self.widgets['alert_location'].value = (alert_msg.get('alert_location', 'fixed_top'),)
-            self.widgets['cookie_expire'].value = alert_msg.get('cookie_expire', 0.0)
+            self.widgets['cookie_expire'].value = alert_msg.get('cookie_expire', 24.0)
             self.widgets['retract_timeout'].value = alert_msg.get('retract_timeout', 0)
 
             if 'display_on_every_page' in alert_msg and not alert_msg.get('display_on_every_page'):

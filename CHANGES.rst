@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-2.0.2 (unreleased)
+2.0.2 (2018-03-08)
 ------------------
 
 - Default cookie expire to 24 hours

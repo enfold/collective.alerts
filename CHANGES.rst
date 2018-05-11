@@ -5,7 +5,9 @@ Changelog
 2.0.3 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Include a permission that protects the 'Enable Alerts' checkbox when
+  adding/editing content
+  [frapell]
 
 
 2.0.2 (2018-03-08)

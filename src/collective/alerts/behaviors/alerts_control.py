@@ -19,6 +19,7 @@ class IAlertsControl(model.Schema):
         fields=['enable_alerts']
     )
 
+    directives.write_permission(enable_alerts='collective.alerts.canChooseWhereToShowAlert')
     enable_alerts = schema.Bool(
         title=u'Enable alerts',
         description=u'Allow alerts to be shown here',

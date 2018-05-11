@@ -9,4 +9,9 @@
     title="collective.alerts: Can set alert message"
     />
 
+  <permission
+    id="collective.alerts.canChooseWhereToShowAlert"
+    title="collective.alerts: Can choose where to show the alert"
+    />
+
 </configure>

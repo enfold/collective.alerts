@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-2.0.3 (unreleased)
+2.1.0 (2018-05-11)
 ------------------
 
 - Include a permission that protects the 'Enable Alerts' checkbox when

@@ -4,10 +4,25 @@
     i18n_domain="collective.alerts">
 
     <browser:page
+        name="alerts-controlpanel"
+        for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+        permission="cmf.ManagePortal"
+        class=".controlpanel.AlertsControlPanelView"
+        />
+
+    <browser:page
         for="Products.CMFPlone.interfaces.IPloneSiteRoot"
         name="set-alert-message"
         class=".alert_view.setAlertMessage"
         permission="collective.alerts.canSetAlertMessage"
+        layer="collective.alerts.interfaces.ICollectiveAlertsLayer"
+        />
+
+    <browser:page
+        for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+        name="get-global-alert-message"
+        class=".alert_view.getGlobalAlertMessage"
+        permission="zope2.View"
         layer="collective.alerts.interfaces.ICollectiveAlertsLayer"
         />
 

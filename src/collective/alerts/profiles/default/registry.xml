@@ -1,6 +1,8 @@
 <?xml version="1.0"?>
 <registry>
 
+  <records interface="collective.alerts.interfaces.IAlertsSettings" />
+
   <records prefix="plone.resources/jsalerts-pattern-jsalert"
             interface='Products.CMFPlone.interfaces.IResourceRegistry'>
       <value key="js">++plone++collective.alerts/js/patterns/jsalert/pattern.js</value>

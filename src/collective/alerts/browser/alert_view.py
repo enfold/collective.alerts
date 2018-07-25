@@ -1,20 +1,23 @@
 # -*- coding: utf-8 -*-
+from collective.alerts.interfaces import IAlertsSettings
 from Products.Five import BrowserView
 from plone.app.textfield import RichText
+from plone.app.textfield.interfaces import IRichTextValue
 from plone.app.textfield.value import RichTextValue
 from plone.autoform import directives
 from plone.autoform.form import AutoExtensibleForm
+from plone.registry.interfaces import IRegistry
 from plone.supermodel.directives import primary
 from plone.supermodel import model
-from plone.app.textfield.interfaces import IRichTextValue
+from z3c.form import button
+from z3c.form.form import EditForm
+from zope.annotation.interfaces import IAnnotations
+from zope.component import getUtility
 from zope.schema import Bool
 from zope.schema import Choice
 from zope.schema import Float
 from zope.schema import Int
 from zope.schema import TextLine
-from z3c.form import button
-from z3c.form.form import EditForm
-from zope.annotation.interfaces import IAnnotations
 from zope.schema.vocabulary import SimpleTerm
 from zope.schema.vocabulary import SimpleVocabulary
 
@@ -227,6 +230,34 @@ class getAlertMessage(BrowserView):
                 results[k] = val
         else:
             results = {'visible': False}
+
+        self.request.response.setHeader('Content-type', 'application/json')
+        return json.dumps(results)
+
+
+class getGlobalAlertMessage(BrowserView):
+
+    def __call__(self):
+        results = {'visible': False}
+
+        registry = getUtility(IRegistry)
+        alerts_settings = registry.forInterface(IAlertsSettings, check=False)
+        if alerts_settings.show_alert_from_request:
+            header = alerts_settings.alert_request_header
+            if header:
+                message = self.request.get(header)
+                if message:
+                    results = {
+                        'title': u"",
+                        'message': message,
+                        'klass': 'info',
+                        'alert_location': 'fixed_top',
+                        'visible': True,
+                        'cookie_expire': 0,
+                        'retract_timeout': 0,
+                        'display_on_every_page': True,
+                        'date': datetime.now().isoformat(),
+                    }
 
         self.request.response.setHeader('Content-type', 'application/json')
         return json.dumps(results)

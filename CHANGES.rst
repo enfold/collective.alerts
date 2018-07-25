@@ -5,7 +5,8 @@ Changelog
 2.1.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Allow to create an alert message using a request header
+  [frapell]
 
 
 2.1.0 (2018-05-11)

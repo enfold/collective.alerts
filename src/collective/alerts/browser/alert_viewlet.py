@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from plone.app.layout.viewlets.common import ViewletBase
 
 
@@ -12,3 +13,7 @@ class AlertViewlet(ViewletBase):
         else:
             self.show_in_context = "false"
         self.get_message_view = "%s/get-alert-message" % self.context.portal_url.getPortalObject().absolute_url()
+        self.get_global_message_view = (
+                "%s/get-global-alert-message" %
+                self.context.portal_url.getPortalObject().absolute_url()
+        )

@@ -1,1 +1,2 @@
+<div class="pat-alertmessage" data-pat-alertmessage='{"get_message_view": "${view/get_global_message_view}"}'> </div>
 <div class="pat-alertmessage" data-pat-alertmessage='{"get_message_view": "${view/get_message_view}", "show_in_context": ${view/show_in_context}}'> </div>

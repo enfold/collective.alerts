@@ -5,7 +5,8 @@ Changelog
 2.2.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Include jquery.cookie plugin
+  [frapell]
 
 
 2.2.0 (2018-07-25)

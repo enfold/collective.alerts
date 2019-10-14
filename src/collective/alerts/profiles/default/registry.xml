@@ -28,7 +28,7 @@
            interface='Products.CMFPlone.interfaces.IBundleRegistry'>
     <value key="csscompilation">++plone++collective.alerts/css/jsalerts.min.css</value>
     <value key="jscompilation">++plone++collective.alerts/js/jsalerts.min.js</value>
-    <value key="last_compilation">2017-12-06 00:00:00</value>
+    <value key="last_compilation">2019-10-13 00:00:00</value>
     <value key="compile">True</value>
     <value key="depends">plone</value>
     <value key="resources">
@@ -38,6 +38,7 @@
     <value key="merge_with">default</value>
     <value key="stub_js_modules">
       <element>jquery</element>
+      <element>jquery.cookie</element>
       <element>mockup-patterns-base</element>
     </value>
   </records>

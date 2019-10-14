@@ -2,7 +2,8 @@
 define([
   'jquery',
   'pat-base',
-  'crypto-js'
+  'crypto-js',
+  'jquery.cookie'
 ], function($, Base, CryptoJS) {
   'use strict';
 

@@ -5,6 +5,11 @@ Changelog
 2.2.1 (unreleased)
 ------------------
 
+- Find whether the get-alerts views are intended to be cached, and avoid
+  jquery .ajax() call to bust the cache automatically. Also provide a
+  cache purge event for them
+  [frapell]
+
 - Include jquery.cookie plugin
   [frapell]
 

@@ -9,10 +9,16 @@ from plone.autoform.form import AutoExtensibleForm
 from plone.registry.interfaces import IRegistry
 from plone.supermodel.directives import primary
 from plone.supermodel import model
+from Products.CMFPlone.interfaces import IPloneSiteRoot
+from z3c.caching.interfaces import IPurgePaths
+from z3c.caching.purge import Purge
 from z3c.form import button
 from z3c.form.form import EditForm
 from zope.annotation.interfaces import IAnnotations
+from zope.component import adapter
 from zope.component import getUtility
+from zope.event import notify
+from zope.interface import implementer
 from zope.schema import Bool
 from zope.schema import Choice
 from zope.schema import Float
@@ -120,7 +126,7 @@ class IAlertSchema(model.Schema):
 class setAlertMessage(AutoExtensibleForm, EditForm):
 
     schema = IAlertSchema
-
+    status = ""
     ignoreContext = True
 
     def updateWidgets(self, *args, **kwargs):
@@ -203,8 +209,9 @@ class setAlertMessage(AutoExtensibleForm, EditForm):
             'display_on_every_page': display_on_every_page,
             'date': datetime.now().isoformat(),
         }
-        self.status = ""
 
+        self.status = ""
+        notify(Purge(self.context))
         self.request.response.redirect(self.context.absolute_url())
 
     @button.buttonAndHandler(u"Cancel")
@@ -261,3 +268,19 @@ class getGlobalAlertMessage(BrowserView):
 
         self.request.response.setHeader('Content-type', 'application/json')
         return json.dumps(results)
+
+
+@adapter(IPloneSiteRoot)
+@implementer(IPurgePaths)
+class AlertViewPurgePaths(object):
+    """
+    """
+
+    def __init__(self, context):
+        self.context = context
+
+    def getRelativePaths(self):
+        return ['/get-alert-message', '/get-global-alert-message']
+
+    def getAbsolutePaths(self):
+        return []

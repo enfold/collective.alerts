@@ -1946,7 +1946,7 @@ define('pat-logger',[
 });
 
 /*!
- * jQuery Browser Plugin 0.0.8
+ * jQuery Browser Plugin 0.1.0
  * https://github.com/gabceb/jquery-browser-plugin
  *
  * Original jquery-browser code Copyright 2005, 2015 jQuery Foundation, Inc. and other contributors
@@ -1987,6 +1987,7 @@ define('pat-logger',[
     var match = /(edge)\/([\w.]+)/.exec( ua ) ||
         /(opr)[\/]([\w.]+)/.exec( ua ) ||
         /(chrome)[ \/]([\w.]+)/.exec( ua ) ||
+        /(iemobile)[\/]([\w.]+)/.exec( ua ) ||
         /(version)(applewebkit)[ \/]([\w.]+).*(safari)[ \/]([\w.]+)/.exec( ua ) ||
         /(webkit)[ \/]([\w.]+).*(version)[ \/]([\w.]+).*(safari)[ \/]([\w.]+)/.exec( ua ) ||
         /(webkit)[ \/]([\w.]+)/.exec( ua ) ||
@@ -1998,11 +1999,11 @@ define('pat-logger',[
 
     var platform_match = /(ipad)/.exec( ua ) ||
         /(ipod)/.exec( ua ) ||
+        /(windows phone)/.exec( ua ) ||
         /(iphone)/.exec( ua ) ||
         /(kindle)/.exec( ua ) ||
         /(silk)/.exec( ua ) ||
         /(android)/.exec( ua ) ||
-        /(windows phone)/.exec( ua ) ||
         /(win)/.exec( ua ) ||
         /(mac)/.exec( ua ) ||
         /(linux)/.exec( ua ) ||
@@ -2047,12 +2048,20 @@ define('pat-logger',[
     }
 
     // IE11 has a new token so we will assign it msie to avoid breaking changes
-    // IE12 disguises itself as Chrome, but adds a new Edge token.
-    if ( browser.rv || browser.edge ) {
+    if ( browser.rv || browser.iemobile) {
       var ie = "msie";
 
       matched.browser = ie;
       browser[ie] = true;
+    }
+
+    // Edge is officially known as Microsoft Edge, so rewrite the key to match
+    if ( browser.edge ) {
+      delete browser.edge;
+      var msedge = "msedge";
+
+      matched.browser = msedge;
+      browser[msedge] = true;
     }
 
     // Blackberry browsers are marked as Safari on BlackBerry
@@ -9665,7 +9674,8 @@ define('jsalerts-pattern-jsalert',[
     parser: 'mockup',
     defaults: {
         'get_message_view': '/get-alert-message',
-        'show_in_context': true
+        'show_in_context': true,
+        'cache': false
     },
 
     set_cookie: function(data){
@@ -9837,7 +9847,8 @@ define('jsalerts-pattern-jsalert',[
         url:      self.options.get_message_view,
         type:     'GET',
         context:  self.$el,
-        async:    true
+        async:    true,
+        cache:    self.options.cache
       }).success(function(data, status, xhr) {
         if (!self.is_visible(data)){
           return;

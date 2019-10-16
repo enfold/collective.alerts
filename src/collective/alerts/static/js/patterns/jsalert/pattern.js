@@ -14,7 +14,8 @@ define([
     parser: 'mockup',
     defaults: {
         'get_message_view': '/get-alert-message',
-        'show_in_context': true
+        'show_in_context': true,
+        'cache': false
     },
 
     set_cookie: function(data){
@@ -186,7 +187,8 @@ define([
         url:      self.options.get_message_view,
         type:     'GET',
         context:  self.$el,
-        async:    true
+        async:    true,
+        cache:    self.options.cache
       }).success(function(data, status, xhr) {
         if (!self.is_visible(data)){
           return;

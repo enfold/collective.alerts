@@ -42,4 +42,6 @@
         permission="zope2.View"
         />
 
+    <adapter factory=".alert_view.AlertViewPurgePaths" name="collective.alerts.viewspurge" />
+
 </configure>

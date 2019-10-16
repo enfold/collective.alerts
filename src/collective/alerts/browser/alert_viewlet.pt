@@ -1,2 +1,2 @@
-<div class="pat-alertmessage" data-pat-alertmessage='{"get_message_view": "${view/get_global_message_view}"}'> </div>
-<div class="pat-alertmessage" data-pat-alertmessage='{"get_message_view": "${view/get_message_view}", "show_in_context": ${view/show_in_context}}'> </div>
+<div class="pat-alertmessage" tal:attributes="data-pat-alertmessage python:view.json_config('global')"> </div>
+<div class="pat-alertmessage" tal:attributes="data-pat-alertmessage view/json_config"> </div>

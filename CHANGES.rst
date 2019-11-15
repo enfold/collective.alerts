@@ -5,6 +5,9 @@ Changelog
 2.2.1 (unreleased)
 ------------------
 
+- Honour the 'Enable alerts' setting on content
+  [frapell]
+
 - Find whether the get-alerts views are intended to be cached, and avoid
   jquery .ajax() call to bust the cache automatically. Also provide a
   cache purge event for them

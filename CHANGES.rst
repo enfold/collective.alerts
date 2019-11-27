@@ -5,6 +5,9 @@ Changelog
 2.2.1 (unreleased)
 ------------------
 
+- Allow to modify the alert types from the control panel
+  [frapell]
+
 - Honour the 'Enable alerts' setting on content
   [frapell]
 

@@ -39,4 +39,9 @@
       factory=".setuphandlers.HiddenProfiles"
       name="collective.alerts-hiddenprofiles" />
 
+  <utility
+      component=".vocabularies.AlertTypesVocabularyFactory"
+      name="collective.alerts.AlertTypes"
+      />
+
 </configure>

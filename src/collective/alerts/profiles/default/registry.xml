@@ -3,6 +3,20 @@
 
   <records interface="collective.alerts.interfaces.IAlertsSettings" />
 
+  <record name="collective.alerts.interfaces.IAlertsSettings.alert_types" interface="collective.alerts.interfaces.IAlertsSettings" field="alert_types">
+    <field type="plone.registry.field.Text">
+      <default></default>
+      <description xmlns:ns0="http://xml.zope.org/namespaces/i18n" ns0:domain="collective.alerts" ns0:translate="">Add here the different alert types. Format: id|title</description>
+      <required>False</required>
+      <title xmlns:ns0="http://xml.zope.org/namespaces/i18n" ns0:domain="collective.alerts" ns0:translate="">Alert types</title>
+    </field>
+    <value>disabled|Disabled&#13;
+info|Info&#13;
+warning|Warning&#13;
+danger|Danger&#13;
+success|Success</value>
+  </record>
+
   <records prefix="plone.resources/jsalerts-pattern-jsalert"
             interface='Products.CMFPlone.interfaces.IResourceRegistry'>
       <value key="js">++plone++collective.alerts/js/patterns/jsalert/pattern.js</value>

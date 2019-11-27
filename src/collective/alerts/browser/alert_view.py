@@ -35,19 +35,6 @@ import json
 ANN_KEY = "collective.alerts"
 
 
-klass_items = [
-    ("disabled", u"Disabled"),
-    ("info", u"Info"),
-    ("warning", u"Warning"),
-    ("danger", u"Danger"),
-    ("success", u"Success"),
-]
-
-klass_terms = [SimpleTerm(value=pair[0], token=pair[0], title=pair[1]) for pair in klass_items]
-
-klass_vocab = SimpleVocabulary(klass_terms)
-
-
 location_items = [
     ("fixed_top", u"Fixed on top"),
     ("slide_left", u"Slide from the left"),
@@ -64,7 +51,7 @@ class IAlertSchema(model.Schema):
     directives.widget(alert_type='plone.app.z3cform.widget.SelectFieldWidget')
     alert_type = Choice(
         title=u"Alert type",
-        vocabulary=klass_vocab,
+        vocabulary="collective.alerts.AlertTypes",
         required=True,
     )
 

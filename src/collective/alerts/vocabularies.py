@@ -16,7 +16,7 @@ class AlertTypesVocabulary(object):
     """
 
     def __call__(self, context):
-        items = []
+        items = [SimpleTerm('disabled', 'disabled', u"Disabled")]
         registry = getUtility(IRegistry)
         alerts_settings = registry.forInterface(IAlertsSettings, check=False)
         if alerts_settings.alert_types:

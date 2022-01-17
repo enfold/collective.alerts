@@ -5,7 +5,8 @@ Changelog
 2.3.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Plone 6 / ES6
+  [frapell]
 
 
 2.3.0 (2019-12-10)

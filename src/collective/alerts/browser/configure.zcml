@@ -1,7 +1,14 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
+    xmlns:plone="http://namespaces.plone.org/plone"
     xmlns:browser="http://namespaces.zope.org/browser"
     i18n_domain="collective.alerts">
+
+    <plone:static
+        directory="static"
+        type="plone"
+        name="collective.alerts"
+        />
 
     <browser:page
         name="alerts-controlpanel"

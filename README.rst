@@ -6,3 +6,8 @@
 collective.alerts
 ==============================================================================
 
+How to recompile JS:
+
+- yarn install
+- npm run build:webpack
+

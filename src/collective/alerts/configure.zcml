@@ -1,21 +1,13 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
-    xmlns:plone="http://namespaces.plone.org/plone"
     xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
     xmlns:i18n="http://namespaces.zope.org/i18n"
     i18n_domain="collective.alerts">
 
-  <includeDependencies package="." />
   <include file="permissions.zcml" />
 
   <include package=".browser" />
   <include package=".behaviors" />
-
-  <plone:static
-      directory="static"
-      type="plone"
-      name="collective.alerts"
-      />
 
   <genericsetup:registerProfile
       name="default"

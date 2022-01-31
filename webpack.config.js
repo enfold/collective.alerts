@@ -7,8 +7,11 @@ module.exports = async (env, argv) => {
         entry: {
             "jsalerts": path.resolve(__dirname, "resources/jsalerts-config"),
         },
-        externals: {
+	externals: {
+            window: "window",
+            $: 'jquery',
             jquery: 'jQuery',
+            "window.jquery": 'jQuery',
         },
     };
     config = patternslib_config(env, argv, config, ["mockup"]);

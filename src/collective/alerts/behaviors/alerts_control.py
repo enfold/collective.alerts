@@ -23,6 +23,7 @@ class IAlertsControl(model.Schema):
     enable_alerts = schema.Bool(
         title=u'Enable alerts',
         description=u'Allow alerts to be shown here',
+        required=False,
     )
 
     directives.omitted('enable_alerts')

@@ -11,7 +11,7 @@
         category="Products"
         condition_expr=""
         url_expr="string:${portal_url}/@@alerts-controlpanel"
-        icon_expr="string:${portal_url}/++resource++collective.alerts/icon.png"
+        icon_expr="string:exclamation-triangle"
         visible="True"
         i18n:attributes="title">
             <permission>Manage portal</permission>

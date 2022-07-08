@@ -9,7 +9,7 @@
    <property
       name="url_expr">string:${globals_view/navigationRootUrl}/@@set-alert-message</property>
    <property name="link_target"></property>
-   <property name="icon_expr"></property>
+   <property name="icon_expr">string:exclamation-triangle</property>
    <property name="available_expr"></property>
    <property name="permissions">
     <element value="collective.alerts: Can set alert message"/>

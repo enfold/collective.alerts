@@ -16,15 +16,4 @@ danger|Danger&#13;
 success|Success</value>
   </record>
 
-  <records prefix="plone.bundles/jsalerts"
-           interface='Products.CMFPlone.interfaces.IBundleRegistry'>
-    <value key="csscompilation"></value>
-    <value key="jscompilation">++plone++collective.alerts/jsalerts.min.js</value>
-    <value key="last_compilation">2022-01-17 00:00:00</value>
-    <value key="compile">False</value>
-    <value key="depends">plone</value>
-    <value key="enabled">True</value>
-    <value key="merge_with">default</value>
-  </records>
-
 </registry>

@@ -1,8 +1,10 @@
 process.traceDeprecation = true;
-const package_json = require("./package.json");
+const mf_config = require("@patternslib/dev/webpack/webpack.mf");
 const path = require("path");
-const patternslib_config = require("@patternslib/patternslib/webpack/webpack.config");
-const mf_config = require("@patternslib/patternslib/webpack/webpack.mf");
+const package_json = require("./package.json");
+const package_json_mockup = require("@plone/mockup/package.json");
+const package_json_patternslib = require("@patternslib/patternslib/package.json");
+const patternslib_config = require("@patternslib/dev/webpack/webpack.config.js");
 
 module.exports = (env, argv) => {
     let config = {
@@ -11,14 +13,19 @@ module.exports = (env, argv) => {
         }
     };
 
-    config = patternslib_config(env, argv, config, ["jsalerts.min"]);
-
+    config = patternslib_config(env, argv, config, ["@plone/mockup"]);
     config.output.path = path.resolve(__dirname, "src/collective/alerts/browser/static");
 
     config.plugins.push(
         mf_config({
-            package_json: package_json,
+            name: "jsalerts",
+            filename: "jsalerts-remote.min.js",
             remote_entry: config.entry["jsalerts.min"],
+            dependencies: {
+                ...package_json_patternslib.dependencies,
+                ...package_json_mockup.dependencies,
+                ...package_json.dependencies,
+            },
         })
     );
 

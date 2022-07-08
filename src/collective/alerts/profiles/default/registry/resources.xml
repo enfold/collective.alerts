@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<registry>
+
+  <records prefix="plone.bundles/jsalerts"
+           interface='Products.CMFPlone.interfaces.IBundleRegistry'>
+    <value key="enabled">True</value>
+    <value key="expression">python: member is not None</value>
+    <value key="jscompilation">++plone++collective.alerts/jsalerts-remote.min.js</value>
+    <value key="csscompilation"></value>
+    <value key="load_async">False</value>
+    <value key="load_defer">False</value>
+  </records>
+
+</registry>

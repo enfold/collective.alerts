@@ -4,4 +4,8 @@ include *.rst
 global-exclude *.pyc
 exclude *.sh
 exclude Vagrantfile
-
+include *.js
+include *.json
+include *.lock
+recursive-include resources *.js
+recursive-include resources *.scss

@@ -1,0 +1,29 @@
+<configure
+  xmlns="http://namespaces.zope.org/zope"
+  xmlns:genericsetup="http://namespaces.zope.org/genericsetup">
+
+  <!-- -*- extra stuff goes here -*- -->
+
+  <genericsetup:registerProfile
+    name="upgrade1001"
+    title="collective.alerts upgrades to 1001"
+    description=""
+    for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+    provides="Products.GenericSetup.interfaces.EXTENSION"
+    directory="profiles/upgrades/1001"
+    />
+
+  <genericsetup:upgradeSteps
+    source="1000"
+    destination="1001"
+    profile="collective.alerts:default">
+
+    <genericsetup:upgradeStep
+      title="Upgrade to 1001"
+      description=""
+      handler=".upgrades.upgrade_to_1001"
+      />
+
+  </genericsetup:upgradeSteps>
+
+</configure>

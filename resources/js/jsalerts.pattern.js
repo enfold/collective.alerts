@@ -209,6 +209,10 @@ export default Base.extend({
             if (data.alert_location === 'slide_right'){
               self.show_slide(data, 'right');
             }
+
+            if (data.alert_location === 'slide_top'){
+              self.show_slide(data, 'top');
+            }
         }
       });
     }

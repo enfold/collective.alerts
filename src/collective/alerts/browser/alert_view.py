@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from collective.alerts import _
 from collective.alerts.interfaces import IAlertsSettings
 from Products.Five import BrowserView
 from plone.app.textfield import RichText
@@ -36,9 +37,10 @@ ANN_KEY = "collective.alerts"
 
 
 location_items = [
-    ("fixed_top", u"Fixed on top"),
-    ("slide_left", u"Slide from the left"),
-    ("slide_right", u"Slide from the right"),
+    ("fixed_top", _(u"Fixed on top")),
+    ("slide_left", _(u"Slide from the left")),
+    ("slide_right", _(u"Slide from the right")),
+    ("slide_top", _(u"Slide from the top")),
 ]
 
 location_terms = [SimpleTerm(value=pair[0], token=pair[0], title=pair[1]) for pair in location_items]

@@ -5,7 +5,8 @@ Changelog
 3.0.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Add 'Slide from the top' location to the alert
+  [frapell]
 
 
 3.0.0 (2022-09-01)

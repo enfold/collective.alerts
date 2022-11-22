@@ -5,6 +5,9 @@ Changelog
 3.0.1 (unreleased)
 ------------------
 
+- Add 'id' attributes to the viewlet <div>'s
+  [frapell]
+
 - Add 'Slide from the top' location to the alert
   [frapell]
 

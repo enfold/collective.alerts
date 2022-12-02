@@ -5,6 +5,10 @@ Changelog
 3.0.1 (unreleased)
 ------------------
 
+- Add ability to specify how much time a minimized alert, should not 
+  automatically start opened
+  [frapell]
+
 - Add 'id' attributes to the viewlet <div>'s
   [frapell]
 

@@ -16,19 +16,30 @@ export default Base.extend({
         'cache': false
     },
 
-    set_cookie: function(data){
+    set_cookie: function(data, action){
       var self = this;
       var cookie_expire = data.cookie_expire ? data.cookie_expire : 0;
+      var cookie_expire_minimize = data.cookie_expire_minimize ? data.cookie_expire_minimize : 0;
 
-      if (cookie_expire === 0 || isNaN(parseFloat(cookie_expire))){
+      if (action === 'minimize' && (cookie_expire_minimize === 0 || isNaN(parseFloat(cookie_expire_minimize)))){
         return;
       }
-      var md5_key = data.alert_location + data.title + data.cookie_expire + data.display_on_every_page + data.klass + data.message + data.retract_timeout + data.date;
+      if (action === 'close' && (cookie_expire === 0 || isNaN(parseFloat(cookie_expire)))){
+        return;
+      }
+
+      var md5_key = data.alert_location + data.title + data.cookie_expire + data.cookie_expire_minimize + data.display_on_every_page + data.klass + data.message + data.retract_timeout + data.date;
 
       var val = MD5(md5_key);
       var date = new Date();
-      date.setTime(date.getTime() + (cookie_expire * 60 * 60 * 1000));
-      $.cookie("alert.message."+val.toString().slice(20), "1", { expires: date, path: '/' });
+      if (action == 'close'){
+        date.setTime(date.getTime() + (cookie_expire * 60 * 60 * 1000));
+      }
+      if (action == 'minimize'){
+        date.setTime(date.getTime() + (cookie_expire_minimize * 60 * 60 * 1000));
+      }
+
+      $.cookie("alert.message."+action+"."+val.toString().slice(20), "1", { expires: date, path: '/' });
     },
 
     is_visible: function(data){
@@ -36,11 +47,11 @@ export default Base.extend({
       var should_show = false;
       if (data.visible){
         // Emergency message visible, now check cookie
-        var md5_key = data.alert_location + data.title + data.cookie_expire + data.display_on_every_page + data.klass + data.message + data.retract_timeout + data.date;
+        var md5_key = data.alert_location + data.title + data.cookie_expire + data.cookie_expire_minimize + data.display_on_every_page + data.klass + data.message + data.retract_timeout + data.date;
         var val = MD5(md5_key);
-        var cookie = $.cookie("alert.message."+val.toString().slice(20));
+        var close_cookie = $.cookie("alert.message.close."+val.toString().slice(20));
 
-        if (cookie === undefined){
+        if (close_cookie === undefined){
           // No cookie, now check if should be seen at homepage only
           var display_on_every_page;
           if (data.display_on_every_page === undefined){
@@ -72,7 +83,7 @@ export default Base.extend({
         var close = $('<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>')
                     .on('click', function () {
                         self.$el.html("");
-                        self.set_cookie(data);
+                        self.set_cookie(data, 'close');
                     });;
 
         var msg = $('<div></div>');
@@ -97,12 +108,14 @@ export default Base.extend({
 
     show_slide: function(data, direction){
       var self = this;
+
       var slide_box = $('<div class="slide-alert-message"></div>');
       slide_box.addClass(direction);
       slide_box.addClass('alert-'+data.klass);
 
       var minimize = $('<button type="button" class="close minimize"><span aria-hidden="true">&nbsp;-</span></button>')
                   .on('click', function () {
+                      self.set_cookie(data, 'minimize');
                       if (slide_box.hasClass('visible')){
                         slide_box.removeClass('visible');
                         clearTimeout(timeout);
@@ -112,7 +125,7 @@ export default Base.extend({
       var close = $('<button type="button" class="close"><span aria-hidden="true">&times;</span></button>')
                   .on('click', function () {
                       self.$el.html("");
-                      self.set_cookie(data);
+                      self.set_cookie(data, 'close');
                   });
 
       var msg = $('<div></div>');
@@ -149,8 +162,13 @@ export default Base.extend({
       trigger_tab.html(data.title ? data.title : data.klass);
       self.$el.append(trigger_tab);
 
-      /* It should be opened by default */
-      trigger_tab.trigger('click');
+      var md5_key = data.alert_location + data.title + data.cookie_expire + data.cookie_expire_minimize + data.display_on_every_page + data.klass + data.message + data.retract_timeout + data.date;
+      var val = MD5(md5_key);
+      var minimize_cookie = $.cookie("alert.message.minimize."+val.toString().slice(20));
+      if (minimize_cookie === undefined){
+        /* Only open the notification if there is no cookie */
+        trigger_tab.trigger('click');
+      }
 
     },
 
@@ -162,7 +180,7 @@ export default Base.extend({
       var close = $('<button type="button" class="close"><span aria-hidden="true">&times;</span></button>')
                   .on('click', function () {
                       self.$el.html("");
-                      self.set_cookie(data);
+                      self.set_cookie(data, 'close');
                   });
 
       var msg = $('<div></div>');

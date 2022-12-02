@@ -82,8 +82,20 @@ class IAlertSchema(model.Schema):
         title=u"Close expire",
         description=(
             u"Provide the amount of hours it will take for an alert to "
-            u"appear again if the user dismisses it. You can specify "
-            u"fractions of an hout, example, 0.5 will be half hour. Use 0 so "
+            u"appear again if the user closes it. You can specify "
+            u"fractions of an hour, example, 0.5 will be half hour. Use 0 so "
+            u"it will show up on every page refresh."
+        ),
+        required=False,
+        default=24.0,
+    )
+
+    cookie_expire_minimize = Float(
+        title=u"Minimize expire",
+        description=(
+            u"Provide the amount of hours it will take for an alert to "
+            u"appear again if the user minimizes it. You can specify "
+            u"fractions of an hour, example, 0.5 will be half hour. Use 0 so "
             u"it will show up on every page refresh."
         ),
         required=False,
@@ -133,6 +145,7 @@ class setAlertMessage(AutoExtensibleForm, EditForm):
             self.widgets['title'].value = alert_msg.get('title', u"")
             self.widgets['alert_type'].value = (alert_msg.get('klass', 'disabled'),)
             self.widgets['alert_location'].value = (alert_msg.get('alert_location', 'fixed_top'),)
+            self.widgets['cookie_expire_minimize'].value = alert_msg.get('cookie_expire_minimize', 24.0)
             self.widgets['cookie_expire'].value = alert_msg.get('cookie_expire', 24.0)
             self.widgets['retract_timeout'].value = alert_msg.get('retract_timeout', 0)
 
@@ -157,7 +170,8 @@ class setAlertMessage(AutoExtensibleForm, EditForm):
         alert_type = 'disabled'
         alert_location = 'fixed_top'
         visible = False
-        cookie_expire = 0
+        cookie_expire = 24.0
+        cookie_expire_minimize = 24.0
         retract_timeout = 0
         display_on_every_page = True
 
@@ -180,6 +194,9 @@ class setAlertMessage(AutoExtensibleForm, EditForm):
             if 'cookie_expire' in data:
                 cookie_expire = data["cookie_expire"]
 
+            if 'cookie_expire_minimize' in data:
+                cookie_expire_minimize = data["cookie_expire_minimize"]
+
             if 'retract_timeout' in data:
                 retract_timeout = data["retract_timeout"]
 
@@ -194,6 +211,7 @@ class setAlertMessage(AutoExtensibleForm, EditForm):
             'alert_location': alert_location,
             'visible': visible,
             'cookie_expire': cookie_expire,
+            'cookie_expire_minimize': cookie_expire_minimize,
             'retract_timeout': retract_timeout,
             'display_on_every_page': display_on_every_page,
             'date': datetime.now().isoformat(),
@@ -250,6 +268,7 @@ class getGlobalAlertMessage(BrowserView):
                         'alert_location': 'fixed_top',
                         'visible': True,
                         'cookie_expire': 0,
+                        'cookie_expire_minimize': 0,
                         'retract_timeout': 0,
                         'display_on_every_page': True,
                         'date': datetime.now().isoformat(),

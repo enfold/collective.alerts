@@ -174,7 +174,7 @@ export default Base.extend({
 
     show_mobile: function(data){
       var self = this;
-      var alert_box = $('<div class="slide-alert-message"></div>');
+      var alert_box = $('<div class="slide-alert-message mobile"></div>');
       alert_box.addClass('alert-'+data.klass);
 
       var close = $('<button type="button" class="close"><span aria-hidden="true">&times;</span></button>')

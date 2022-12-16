@@ -8,7 +8,7 @@ Changelog
 - Upgrade to latest mockup and patternslib
   [frapell]
 
-- Add 'mobile' class when rendering in mobile
+- When rendering in "mobile" mode, simply add a new class to the element
   [frapell]
 
 - Add ability to specify how much time a minimized alert, should not 

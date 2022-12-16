@@ -80,6 +80,11 @@ export default Base.extend({
     show_on_top: function(data){
         var self = this;
         var div = $('<div class="alert alert-'+data.klass+' alert-dismissible" role="alert"></div>');
+
+        if(window.innerWidth <= 769) {
+          div.addClass("mobile");
+        }
+
         var close = $('<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>')
                     .on('click', function () {
                         self.$el.html("");
@@ -112,6 +117,10 @@ export default Base.extend({
       var slide_box = $('<div class="slide-alert-message"></div>');
       slide_box.addClass(direction);
       slide_box.addClass('alert-'+data.klass);
+
+      if(window.innerWidth <= 769) {
+        slide_box.addClass("mobile");
+      }
 
       var minimize = $('<button type="button" class="close minimize"><span aria-hidden="true">&nbsp;-</span></button>')
                   .on('click', function () {
@@ -172,31 +181,6 @@ export default Base.extend({
 
     },
 
-    show_mobile: function(data){
-      var self = this;
-      var alert_box = $('<div class="slide-alert-message mobile"></div>');
-      alert_box.addClass('alert-'+data.klass);
-
-      var close = $('<button type="button" class="close"><span aria-hidden="true">&times;</span></button>')
-                  .on('click', function () {
-                      self.$el.html("");
-                      self.set_cookie(data, 'close');
-                  });
-
-      var msg = $('<div></div>');
-      if (data.title !== ""){
-        msg.append($('<strong>'+data.title+': </strong>'));
-      }
-      if (data.message !== ""){
-        msg.append($('<span>'+data.message+'</span>'));
-      }
-      alert_box.append(close);
-      alert_box.append(msg);
-
-      self.$el.html("");
-      self.$el.append(alert_box);
-    },
-
     init: function() {
       if (window.location.pathname.includes("@@set-alert-message")){
           return;
@@ -212,25 +196,14 @@ export default Base.extend({
         if (!self.is_visible(data)){
           return;
         }
-        if(window.innerWidth <= 769) {
-            self.show_mobile(data);
-        }
-        else{
-            if (data.alert_location === 'fixed_top'){
-              self.show_on_top(data);
-            }
-
-            if (data.alert_location === 'slide_left'){
-              self.show_slide(data, 'left');
-            }
-
-            if (data.alert_location === 'slide_right'){
-              self.show_slide(data, 'right');
-            }
-
-            if (data.alert_location === 'slide_top'){
-              self.show_slide(data, 'top');
-            }
+        if (data.alert_location === 'fixed_top'){
+          self.show_on_top(data);
+        } else if (data.alert_location === 'slide_left'){
+          self.show_slide(data, 'left');
+        } else if (data.alert_location === 'slide_right'){
+          self.show_slide(data, 'right');
+        } else if (data.alert_location === 'slide_top'){
+          self.show_slide(data, 'top');
         }
       });
     }

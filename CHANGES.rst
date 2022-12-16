@@ -5,6 +5,12 @@ Changelog
 3.0.1 (unreleased)
 ------------------
 
+- Upgrade to latest mockup and patternslib
+  [frapell]
+
+- Add 'mobile' class when rendering in mobile
+  [frapell]
+
 - Add ability to specify how much time a minimized alert, should not 
   automatically start opened
   [frapell]

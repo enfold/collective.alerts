@@ -7,10 +7,10 @@
   },
   "dependencies": {
     "@patternslib/patternslib": "*",
-    "@plone/mockup": "^5.0.0-alpha.21"
+    "@plone/mockup": "^5.0.0-beta.7"
   },
   "devDependencies": {
-    "@patternslib/dev": "^2.3.0",
+    "@patternslib/dev": "^3.1.7",
     "jquery.cookie": "1.4.1",
     "crypto-js": "4.1.1",
     "clean-css-cli": "^5.6.0",

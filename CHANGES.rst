@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-3.0.1 (unreleased)
+3.1.0 (2022-12-20)
 ------------------
 
 - Upgrade to latest mockup and patternslib

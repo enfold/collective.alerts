@@ -5,7 +5,8 @@ Changelog
 3.1.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Add 'alt' attribute to alert buttons
+  [frapell]
 
 
 3.1.0 (2022-12-20)

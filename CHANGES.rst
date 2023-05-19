@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-3.1.1 (unreleased)
+3.1.1 (2023-05-19)
 ------------------
 
 - Add 'alt' attribute to alert buttons

@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-3.1.2 (unreleased)
+3.1.2 (2023-06-28)
 ------------------
 
 - Replace 'alt' in buttons with 'aria-label'

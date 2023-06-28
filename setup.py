@@ -14,7 +14,7 @@ long_description = '\n\n'.join([
 
 setup(
     name='collective.alerts',
-    version='3.1.2.dev0',
+    version='3.1.2',
     description="Product for setting up site alerts",
     long_description=long_description,
     # Get more from https://pypi.python.org/pypi?%3Aaction=list_classifiers

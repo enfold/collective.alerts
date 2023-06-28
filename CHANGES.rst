@@ -5,7 +5,8 @@ Changelog
 3.1.2 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Replace 'alt' in buttons with 'aria-label'
+  [frapell]
 
 
 3.1.1 (2023-05-19)

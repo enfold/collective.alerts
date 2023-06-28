@@ -85,7 +85,7 @@ export default Base.extend({
           div.addClass("mobile");
         }
 
-        var close = $('<button type="button" alt="close" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>')
+        var close = $('<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>')
                     .on('click', function () {
                         self.$el.html("");
                         self.set_cookie(data, 'close');
@@ -122,7 +122,7 @@ export default Base.extend({
         slide_box.addClass("mobile");
       }
 
-      var minimize = $('<button type="button" alt="minimize" class="close minimize"><span aria-hidden="true">&nbsp;-</span></button>')
+      var minimize = $('<button type="button" aria-label="Minimize" class="close minimize"><span aria-hidden="true">&nbsp;-</span></button>')
                   .on('click', function () {
                       self.set_cookie(data, 'minimize');
                       if (slide_box.hasClass('visible')){
@@ -131,7 +131,7 @@ export default Base.extend({
                       }
                   });
 
-      var close = $('<button type="button" alt="close" class="close"><span aria-hidden="true">&times;</span></button>')
+      var close = $('<button type="button" aria-label="Close" class="close"><span aria-hidden="true">&times;</span></button>')
                   .on('click', function () {
                       self.$el.html("");
                       self.set_cookie(data, 'close');
@@ -150,7 +150,7 @@ export default Base.extend({
 
       var timeout;
       /* Trigger button to slide the notification open */
-      var trigger_tab = $('<span class="btn open-slide-alert-message" alt="open"></button>')
+      var trigger_tab = $('<span class="btn open-slide-alert-message" aria-label="Open"></button>')
                         .on('click', function () {
                           if (slide_box.hasClass('visible')){
                             slide_box.removeClass('visible');

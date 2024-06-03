@@ -1,0 +1,45 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    lang="en"
+    metal:use-macro="context/main_template/macros/master"
+    i18n:domain="plone">
+  <body>
+  <metal:main fill-slot="main">
+    <h1 class="documentFirstHeading" tal:content="view/title">Feedback Form</h1>
+    <div tal:replace="structure view/text">Form Text</div>
+    <tal:block tal:define="maxlength view/maxlength;">
+    <form id="form_feedback" method="post" tal:attributes="action string:${context/absolute_url}/alerts-feedback-form">
+      <input type="hidden" value="" name="came_from" tal:attributes="value request/came_from|nothing"/>
+      <fieldset>
+        <div class="form-group">
+          <label class="control-label" for="message">Message</label><br />
+            <textarea onkeyup="countChar(this, 1024)" class="form-control"
+                      id="message" name="message" maxlength="1024"
+                      tal:attributes="maxlength maxlength;
+                                      onkeyup string:countChar(this, $maxlength);"/>
+
+        </div>
+          <input type="submit" id="cancel" class="btn plone-btn-primary" name="cancel" value="Cancel"/> 
+          <input type="submit" id="submit" class="btn plone-btn-primary" name="submit" value="Submit"/>
+
+
+      </fieldset>
+    </form>
+    <script>
+      //<![CDATA[
+        function countChar(val, maxlength) {
+            var len = val.value.length;
+            if (len >= maxlength) {
+                val.value = val.value.substring(0, maxlength);
+            } else {
+                $('#charNum').text(maxlength - len);
+            }
+        };
+      //]]>
+    </script>
+  </tal:block>
+  </metal:main>
+  </body>
+</html>

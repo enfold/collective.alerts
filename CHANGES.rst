@@ -5,7 +5,8 @@ Changelog
 2.3.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Add optional feedback form.
+[enfold_josh]
 
 
 2.3.0 (2019-12-10)

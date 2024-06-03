@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from collective.alerts.interfaces import IAlertsSettings
 from Products.Five import BrowserView
+from plone.api import portal as portal_api
 from plone.app.textfield import RichText
 from plone.app.textfield.interfaces import IRichTextValue
 from plone.app.textfield.value import RichTextValue
@@ -30,6 +31,7 @@ from zope.schema.vocabulary import SimpleVocabulary
 from datetime import datetime
 
 import json
+import urllib.parse
 
 
 ANN_KEY = "collective.alerts"
@@ -66,6 +68,12 @@ class IAlertSchema(model.Schema):
         title=u"Message",
         required=False,
         default=u"",
+    )
+
+    show_feedback_button = Bool(
+        title='Show Feedback Form Button',
+        required=False,
+        default=False,
     )
 
     directives.widget(alert_location='plone.app.z3cform.widget.SelectFieldWidget')
@@ -139,6 +147,11 @@ class setAlertMessage(AutoExtensibleForm, EditForm):
             else:
                 self.widgets['display_on_every_page'].value = ['selected']
 
+            if 'show_feedback_button' in alert_msg and not alert_msg.get('show_feedback_button'):
+                self.widgets['show_feedback_button'].value = []
+            else:
+                self.widgets['show_feedback_button'].value = ['selected']
+
     def update(self):
         self.request.set('disable_border', 1)
         return super(setAlertMessage, self).update()
@@ -158,6 +171,7 @@ class setAlertMessage(AutoExtensibleForm, EditForm):
         cookie_expire = 0
         retract_timeout = 0
         display_on_every_page = True
+        show_feedback_button = False
 
         if data:
             if 'title' in data and data['title']:
@@ -184,6 +198,9 @@ class setAlertMessage(AutoExtensibleForm, EditForm):
             if 'display_on_every_page' in data:
                 display_on_every_page = data["display_on_every_page"]
 
+            if 'show_feedback_button' in data:
+                show_feedback_button = data['show_feedback_button']
+
         annotations = IAnnotations(self.context)
         annotations[ANN_KEY] = {
             'title': title,
@@ -195,6 +212,7 @@ class setAlertMessage(AutoExtensibleForm, EditForm):
             'retract_timeout': retract_timeout,
             'display_on_every_page': display_on_every_page,
             'date': datetime.now().isoformat(),
+            'show_feedback_button': show_feedback_button,
         }
 
         self.status = ""
@@ -214,14 +232,21 @@ class getAlertMessage(BrowserView):
         annotations = IAnnotations(self.context)
         results = dict()
         stored_message = annotations.get(ANN_KEY)
-
+        portal_url = portal_api.get_tool('portal_url')()
+        context_url = self.context.absolute_url()
+        came_from = urllib.parse.quote_plus(context_url)
         if stored_message:
+            show_feedback_button = stored_message.get('show_feedback_button', False)
             for k,v in stored_message.items():
+                if k == 'show_feedback_button':
+                    continue
                 if IRichTextValue.providedBy(v):
                     val = v.output
                 else:
                     val = v
                 results[k] = val
+            if show_feedback_button:
+                results['message'] = f'{results["message"]}<p><a href="{portal_url}/alerts-feedback-form?came_from={came_from}">Feedback</a></p>'
         else:
             results = {'visible': False}
 
@@ -232,15 +257,21 @@ class getAlertMessage(BrowserView):
 class getGlobalAlertMessage(BrowserView):
 
     def __call__(self):
-        results = {'visible': False}
 
+        results = {'visible': False}
+        portal_url = portal_api.get_tool('portal_url')()
+        context_url = self.context.absolute_url()
+        came_from = urllib.parse.quote_plus(context_url)
         registry = getUtility(IRegistry)
         alerts_settings = registry.forInterface(IAlertsSettings, check=False)
+        show_feedback_button = getattr(alerts_settings, 'show_feedback_button', False)
         if alerts_settings.show_alert_from_request:
             header = alerts_settings.alert_request_header
             if header:
                 message = self.request.get(header)
                 if message:
+                    if show_feedback_button:
+                        message = f'{message}<p><a href="{portal_url}/alerts-feedback-form?came_from={came_from}">Feedback</a></p>'
                     results = {
                         'title': u"",
                         'message': message,

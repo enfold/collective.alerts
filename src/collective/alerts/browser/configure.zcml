@@ -34,6 +34,15 @@
         layer="collective.alerts.interfaces.ICollectiveAlertsLayer"
         />
 
+    <browser:page
+        for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+        name="alerts-feedback-form"
+        class=".feedback.FeedbackFormView"
+        permission="zope2.View"
+        template="feedback_form.pt"
+        layer="collective.alerts.interfaces.ICollectiveAlertsLayer"
+        />
+
     <browser:viewlet
         name="collective.alerts.alert"
         manager="plone.app.layout.viewlets.interfaces.IAboveContent"

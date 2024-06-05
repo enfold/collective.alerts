@@ -5,7 +5,8 @@ Changelog
 2.3.2 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Make feedback form link a button.
+[enfold_josh]
 
 
 2.3.1 (2024-06-04)

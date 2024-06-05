@@ -226,13 +226,19 @@ class setAlertMessage(AutoExtensibleForm, EditForm):
         self.request.response.redirect(self.context.absolute_url())
 
 
-class getAlertMessage(BrowserView):
+class BaseGetAlertMessageView(BrowserView):
+
+    def _get_feedback_button(self, came_from):
+        portal_url = portal_api.get_tool('portal_url')()
+        return f'<p><button class="plone-btn-primary plone-btn btn-alerts-feedback"><a href="{portal_url}/alerts-feedback-form?came_from={came_from}">Feedback Form</a></button></p>'
+
+
+class getAlertMessage(BaseGetAlertMessageView):
 
     def __call__(self):
         annotations = IAnnotations(self.context)
         results = dict()
         stored_message = annotations.get(ANN_KEY)
-        portal_url = portal_api.get_tool('portal_url')()
         context_url = self.context.absolute_url()
         came_from = urllib.parse.quote_plus(context_url)
         if stored_message:
@@ -246,7 +252,7 @@ class getAlertMessage(BrowserView):
                     val = v
                 results[k] = val
             if show_feedback_button:
-                results['message'] = f'{results["message"]}<p><a href="{portal_url}/alerts-feedback-form?came_from={came_from}">Feedback</a></p>'
+                results['message'] = f'{results["message"]}{self._get_feedback_button(came_from)}'
         else:
             results = {'visible': False}
 
@@ -254,12 +260,11 @@ class getAlertMessage(BrowserView):
         return json.dumps(results)
 
 
-class getGlobalAlertMessage(BrowserView):
+class getGlobalAlertMessage(BaseGetAlertMessageView):
 
     def __call__(self):
 
         results = {'visible': False}
-        portal_url = portal_api.get_tool('portal_url')()
         context_url = self.context.absolute_url()
         came_from = urllib.parse.quote_plus(context_url)
         registry = getUtility(IRegistry)
@@ -271,7 +276,7 @@ class getGlobalAlertMessage(BrowserView):
                 message = self.request.get(header)
                 if message:
                     if show_feedback_button:
-                        message = f'{message}<p><a href="{portal_url}/alerts-feedback-form?came_from={came_from}">Feedback</a></p>'
+                        message = f'{message}{self._get_feedback_button(came_from)}'
                     results = {
                         'title': u"",
                         'message': message,

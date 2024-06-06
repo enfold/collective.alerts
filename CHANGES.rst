@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-2.3.2 (unreleased)
+2.3.2 (2024-06-06)
 ------------------
 
 - Make feedback form link a button.

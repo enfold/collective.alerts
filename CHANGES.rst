@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-2.3.3 (unreleased)
+2.3.3 (2024-06-07)
 ------------------
 
 - Fix Feedback Form button.

@@ -5,7 +5,8 @@ Changelog
 2.3.3 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Fix Feedback Form button.
+[enfold_josh]
 
 
 2.3.2 (2024-06-06)

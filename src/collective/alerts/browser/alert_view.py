@@ -230,7 +230,7 @@ class BaseGetAlertMessageView(BrowserView):
 
     def _get_feedback_button(self, came_from):
         portal_url = portal_api.get_tool('portal_url')()
-        return f'<p><button class="plone-btn-primary plone-btn btn-alerts-feedback"><a href="{portal_url}/alerts-feedback-form?came_from={came_from}">Feedback Form</a></button></p>'
+        return f'<p><a class="plone-btn-primary plone-btn btn-alerts-feedback" href="{portal_url}/alerts-feedback-form?came_from={came_from}">Feedback Form</a></p>'
 
 
 class getAlertMessage(BaseGetAlertMessageView):

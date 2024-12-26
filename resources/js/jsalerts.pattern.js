@@ -122,11 +122,33 @@ export default Base.extend({
         slide_box.addClass("mobile");
       }
 
+      var timeout;
+      /* Trigger button to slide the notification open */
+      var trigger_tab = $('<span class="btn open-slide-alert-message" aria-label="Open"></button>')
+                        .on('click', function () {
+                          if (slide_box.hasClass('visible')){
+                            slide_box.removeClass('visible');
+                            trigger_tab.removeClass('alert-visible');
+                            clearTimeout(timeout);
+                          }
+                          else{
+                            slide_box.addClass('visible');
+                            trigger_tab.addClass('alert-visible');
+                            if (data.retract_timeout !== 0){
+                                timeout = setTimeout(function() {
+                                    slide_box.removeClass('visible');
+                                    trigger_tab.removeClass('alert-visible');
+                                }, data.retract_timeout * 1000);
+                            }
+                          }
+                        });
+
       var minimize = $('<button type="button" aria-label="Minimize" class="close minimize"><span aria-hidden="true">&nbsp;-</span></button>')
                   .on('click', function () {
                       self.set_cookie(data, 'minimize');
                       if (slide_box.hasClass('visible')){
                         slide_box.removeClass('visible');
+                        trigger_tab.removeClass('alert-visible');
                         clearTimeout(timeout);
                       }
                   });
@@ -147,24 +169,6 @@ export default Base.extend({
 
       self.$el.html("");
       self.$el.append(slide_box);
-
-      var timeout;
-      /* Trigger button to slide the notification open */
-      var trigger_tab = $('<span class="btn open-slide-alert-message" aria-label="Open"></button>')
-                        .on('click', function () {
-                          if (slide_box.hasClass('visible')){
-                            slide_box.removeClass('visible');
-                            clearTimeout(timeout);
-                          }
-                          else{
-                            slide_box.addClass('visible');
-                            if (data.retract_timeout !== 0){
-                                timeout = setTimeout(function() {
-                                    slide_box.removeClass('visible');
-                                }, data.retract_timeout * 1000);
-                            }
-                          }
-                        });
 
       trigger_tab.addClass(direction);
       trigger_tab.addClass('alert-'+data.klass);

@@ -5,7 +5,8 @@ Changelog
 3.1.3 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- When the alert is opened, add a class to the button in case special styling is needed
+  [frapell]
 
 
 3.1.2 (2023-06-28)

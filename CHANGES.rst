@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-3.1.3 (unreleased)
+3.1.3 (2024-12-26)
 ------------------
 
 - When the alert is opened, add a class to the button in case special styling is needed

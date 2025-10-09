@@ -2,8 +2,15 @@
 """Module where all interfaces, events and exceptions live."""
 from collective.alerts import _
 from plone.app.textfield import RichText
+from plone.app.z3cform.widget import RichTextFieldWidget
+from plone.autoform import directives
+from plone.registry.field import PersistentField
 from zope.interface import Interface
 from zope import schema
+
+
+class RichTextFieldRegistry(PersistentField, RichText):
+    """ persistent registry textfield """
 
 
 class ICollectiveAlertsLayer(Interface):
@@ -34,11 +41,12 @@ class IAlertsSettings(Interface):
         default='Feedback Form',
     )
 
-    feedback_form_text = RichText(
+    feedback_form_text = RichTextFieldRegistry(
         title=_('Feedback Form Text'),
         description=_('Text to be displayed between the form title and the form field(s).'),
         required=False,
     )
+    directives.widget(feedback_form_text=RichTextFieldWidget)
 
     feedback_form_message_max_length = schema.Int(
         title=_('Feedback Form Message Max Length'),

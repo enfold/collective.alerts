@@ -5,7 +5,9 @@ Changelog
 2.3.4 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Fix alert settings form rich text field
+[enfold_josh]
+
 
 
 2.3.3 (2024-06-07)

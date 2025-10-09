@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-2.3.4 (unreleased)
+2.3.4 (2025-10-09)
 ------------------
 
 - Fix alert settings form rich text field
